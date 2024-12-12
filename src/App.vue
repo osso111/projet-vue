@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <h1>Catalogue De liver</h1>
+    <header>
+      <h1>Catalogue De Livre</h1>
+    </header>
+
     <nav>
-      <router-link to="/">Home</router-link> |  
-      <router-link to="/add-book">Add a New Book</router-link>
+      <button class="nav-button" @click="$router.push('/')">Home</button>
+      <button class="nav-button" @click="$router.push('/add-book')">Add a New Book</button>
     </nav>
+
     <router-view></router-view> <!-- This displays the current view based on the route -->
   </div>
 </template>
@@ -14,17 +18,15 @@ export default {};
 </script>
 
 <style scoped>
-nav {
-  margin-bottom: 20px;
-}
-
-nav a {
-  margin-right: 10px;
-}
 #app {
-  font-family: Arial, sans-serif;
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun and cute font */
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #f9f0ff; /* Light lavender background */
+  border: 2px solid #d1c4e9; /* Subtle border for the app */
+  border-radius: 15px;
+  max-width: 800px;
+  margin: 0 auto; /* Center the app */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 
 header {
@@ -34,22 +36,38 @@ header {
 
 header h1 {
   font-size: 2.5em;
-  color: #333;
+  color: #8e44ad; /* Purple for header */
+  text-shadow: 2px 2px #d1c4e9; /* Soft shadow for the text */
+  font-family: 'Pacifico', cursive; /* Updated cute font for the title */
 }
 
 nav {
-  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.nav-link {
+.nav-button {
   font-size: 1.2em;
-  margin: 0 15px;
-  text-decoration: none;
-  color: #007BFF;
+  padding: 10px 20px;
+  background-color: #ba68c8; /* Purple button background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Button shadow */
+  transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.nav-button:hover {
+  background-color: #9c27b0; /* Darker purple on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.nav-button:active {
+  background-color: #7b1fa2; /* Even darker purple on click */
+  transform: translateY(0); /* Return to normal */
 }
 
 footer {

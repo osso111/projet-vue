@@ -12,5 +12,6 @@ export default new Router({
     { path: '/', component: Home },                        // Home page
     { path: '/add-book', component: AddBookForm },         // Add new book page
     { path: '/book/:id', component: BookDetails, props: true },  // Book details page
+    
   ],
 });
