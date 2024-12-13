@@ -1,3 +1,4 @@
+<!--  /components/BookCard -->
 <template>
   <div class="book-card" @click="goToDetailsPage">
     <h3>{{ book.title }}</h3>

@@ -1,3 +1,4 @@
+<!--  /components/SearchFilter -->
 <template>
   <div class="search-filter">
     <input 

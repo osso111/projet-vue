@@ -1,3 +1,4 @@
+// /store/index.js
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -6,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     books: JSON.parse(localStorage.getItem('books')) || [],  // Load from localStorage
+    categories: ['Fiction', 'Non-Fiction', 'Science', 'Fantasy', 'History', 'Biography'],
   },
   mutations: {
     addBook(state, newBook) {

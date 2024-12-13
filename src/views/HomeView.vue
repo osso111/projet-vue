@@ -1,14 +1,23 @@
+<!--  /views/HomeView -->
 <template>
   <div class="home-container">
     <h2>Gestion du Catalogue De Livres</h2>
 
     <!-- Search Bar -->
-    <input
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search by title or author..."
-      class="search-bar"
-    />
+    <div class="search-section">
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search for a book"
+        class="search-bar"
+      />
+      <select v-model="searchCategory" class="search-bar select-bar">
+        <option value="">All Categories</option>
+        <option v-for="category in categories" :key="category" :value="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
 
     <!-- List of Books -->
     <div v-if="filteredBooks.length">
@@ -34,18 +43,24 @@ export default {
   data() {
     return {
       searchQuery: '',
+      searchCategory: '',
     };
   },
   computed: {
     books() {
       return this.$store.state.books;
     },
+    categories() {
+      return this.$store.state.categories;
+    },
     filteredBooks() {
       return this.books.filter((book) => {
-        return (
+        const matchesQuery =
           book.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          book.author.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
+          book.author.toLowerCase().includes(this.searchQuery.toLowerCase());
+        const matchesCategory =
+          this.searchCategory === '' || book.category === this.searchCategory;
+        return matchesQuery && matchesCategory;
       });
     },
   },
@@ -77,16 +92,27 @@ h2 {
 }
 
 /* Search bar style */
+.search-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
 .search-bar {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   padding: 12px;
-  margin: 20px 0;
   border: 2px solid #9c27b0; /* Purple border */
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
+}
+
+.select-bar {
+  width: 100%;
+  max-width: 200px;
 }
 
 .search-bar:focus {

@@ -1,10 +1,11 @@
+<!--  /views/BookDetails -->
 <template>
   <div class="book-details-container">
     <template v-if="!isEditing">
       <h1>{{ book.title }}</h1>
       <p><strong>Author:</strong> {{ book.author }}</p>
       <p><strong>Publication Date:</strong> {{ book.publishDate }}</p>
-      <p><strong>Description:</strong> {{ book.description }}</p>
+      <p><strong>category:</strong> {{ book.category }}</p>
       <img :src="book.coverImage" alt="Cover Image" class="cover-image" />
 
       <div class="button-container">
@@ -25,8 +26,13 @@
         <label for="publishDate">Publication Date:</label>
         <input type="date" v-model="editableBook.publishDate" id="publishDate" required />
 
-        <label for="description">Description:</label>
-        <textarea v-model="editableBook.description" id="description" required></textarea>
+        <label for="category">Category</label>
+        <select v-model="editableBook.category">
+          <option value="">All Categories</option>
+          <option v-for="category in categories" :key="category" :value="category">
+            {{ category }}
+          </option>
+        </select>
 
         <label for="coverImage">Cover Image URL:</label>
         <input v-model="editableBook.coverImage" id="coverImage" />
@@ -54,6 +60,7 @@ export default {
   props: ['id'],
   data() {
     return {
+      categories: ['Fiction', 'Non-Fiction', 'Science', 'History', 'Biography'],
       book: null,
       isEditing: false, // Toggle between view and edit modes
       editableBook: null, // Stores a copy of the book data for editing
@@ -144,7 +151,7 @@ label {
   color: #7b1fa2;
 }
 
-input, textarea {
+input, textarea, select{
   width: 100%;
   padding: 10px;
   margin: 10px 0;

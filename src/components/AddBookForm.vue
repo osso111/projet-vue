@@ -1,3 +1,4 @@
+<!--  /components/AddBookForm -->
 <template>
   <form @submit.prevent="submitForm" class="add-book-form">
     <div class="form-group">
@@ -13,8 +14,13 @@
       <input type="date" v-model="newBook.publishDate" required class="form-input" />
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea v-model="newBook.description" class="form-textarea"></textarea>
+      <label for="category">Category</label>
+      <select v-model="newBook.category" class="form-input">
+        <option value="">All Categories</option>
+        <option v-for="category in categories" :key="category" :value="category">
+          {{ category }}
+        </option>
+      </select>
     </div>
     <div class="form-group">
       <label for="coverImage">Cover Image</label>
@@ -32,11 +38,16 @@ export default {
         title: '',
         author: '',
         publishDate: '',
-        description: '',
+        category: '',
         coverImage: '',
         id: Date.now().toString(), // Generate a unique ID based on timestamp
-      }
+      },
     };
+  },
+  computed: {
+    categories() {
+      return this.$store.state.categories;
+    },
   },
   methods: {
     submitForm() {
